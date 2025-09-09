@@ -1,15 +1,12 @@
 name: "Mera pehla action workflow"
 
-on:
-  push: 
-    branches:
-      - 'main'
-      - 'feature/**'
+on: workflow_dispatch
+
 jobs:
   terraforminit:
     name: terraform initwa
     runs-on: ubuntu-latest
     steps:
-      - name: Dhondhu Maharaj Rocks
-        run: echo Dhondhu Maharaj
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
 
