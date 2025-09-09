@@ -5,5 +5,11 @@ on:
     branches:
       - 'main'
       - 'feature/**'
-  workflow_dispatch:
+jobs:
+  terraforminit:
+    name: terraform initwa
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dhondhu Maharaj Rocks
+        run: echo Dhondhu Maharaj
 
