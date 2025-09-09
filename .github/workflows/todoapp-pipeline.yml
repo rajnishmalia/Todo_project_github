@@ -25,5 +25,16 @@ jobs:
           client-id: dd01b263-5ece-426e-911c-32d8138bd329
           tenant-id: ec84cc3b-8d4d-4362-b666-466802d7ba4e
           subscription-id: 85bce315-2d40-4002-a3d1-b7f28202855c
+      
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+        working-directory: parent_module/Dev
+
+      - name: Terraform Init
+        id: init
+        run: terraform init -input=false
+        working-directory: parent_module/Dev
           
 
