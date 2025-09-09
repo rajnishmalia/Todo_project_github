@@ -1,8 +1,0 @@
-name: mera second job
-
-on: workflow_dispatch
-
-jobs:
-  terraforminit:
-    name: my first job
-    runs-on: ubuntu-latest
