@@ -8,6 +8,7 @@ permissions:
   
 jobs:
   terraforminit:
+    environment: Dev
     name: terraform initwa
     runs-on: ubuntu-latest
     steps:
