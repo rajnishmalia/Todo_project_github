@@ -47,6 +47,7 @@ module "aks" {
     dns_prefix = "aks-dev-todoapp"
     tags = local.common_tags
 }
+
 module "pip" {
     source = "../../module/azurerm_pip"
     depends_on = [module.rg]
