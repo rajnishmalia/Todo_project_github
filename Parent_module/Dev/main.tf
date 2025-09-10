@@ -56,3 +56,4 @@ module "pip" {
     sku = "Standard"
     tags = local.common_tags
 }
+
