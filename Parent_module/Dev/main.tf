@@ -7,10 +7,10 @@ locals{
 }
 
 module "rg"{
-    source = "../../module/Resource_group"
+    source = "../../module/resource_group"
     rg_name = "rg-dev-todoapp"
     rg_location = "centralindia"
-    tags = locals.common_tags
+    tags = local.common_tags
 }
 module "acr" {
     source = "../../module/azure_container_registry"
@@ -18,32 +18,32 @@ module "acr" {
     acr_name = "acrdevtodoapp"
     location = "centralindia"
     rg_name = "rg-dev-todoapp"
-    tags = locals.common_tags
+    tags = local.common_tags
 }
 module "sql_server"{
-    source = "../../module/azure_sql_server"
+    source = "../../module/sql_server"
     depends_on = [module.rg]
     sql_server_name = "sql-dev-todoapp"
     location = "centralindia"
     rg_name = "rg-dev-todoapp"
-    sql_admin_username = "sqladminuser"
-    sql_admin_password = "P@ssword1234"
-    tags = locals.common_tags
+    admin_username = "sqladminuser"
+    admin_password = "P@ssword1234"
+    tags = local.common_tags
 }
 module "sql_db"{
-    source = "../../module/azure_sql_database"
+    source = "../../module/sql_db"
     depends_on = [module.sql_server]
     sql_db_name = "sqldb-dev-todoapp"
     server_id = module.sql_server.id
     max_size_db = "2"
-    tags = locals.common_tags
+    tags = local.common_tags
 }
 module "aks"{
-    source = "../../module/azure_kubernetes_service"
+    source = "../../module/azure_kubernetes_cluster"
     depends_on = [module.rg]
     aks_name = "aks-dev-todoapp"
     location = "centralindia"
     rg_name = "rg-dev-todoapp"
     dns_prefix = "aks-dev-todoapp"
-    tags = locals.common_tags
+    tags = local.common_tags
 }
