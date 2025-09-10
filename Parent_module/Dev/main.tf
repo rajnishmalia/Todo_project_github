@@ -47,3 +47,12 @@ module "aks" {
     dns_prefix = "aks-dev-todoapp"
     tags = local.common_tags
 }
+module "pip" {
+    source = "../../module/azurerm_pip"
+    depends_on = [module.rg]
+    pip_name = "pip-dev-todoapp"
+    location = "centralindia"
+    rg_name = "rg-dev-todoapp"
+    sku = "Standard"
+    tags = local.common_tags
+}
