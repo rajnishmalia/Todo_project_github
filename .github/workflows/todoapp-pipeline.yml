@@ -7,7 +7,7 @@ permissions:
   contents: read
   
 jobs:
-  terraforminit:
+  terraform-init-plan:
     environment: Dev
     name: terraform initwa
     runs-on: ubuntu-latest
@@ -50,3 +50,23 @@ jobs:
         working-directory: Parent_module/Dev
           
 
+terraform-apply:
+  runs-on: ubuntu-latest
+  needs: terraform-init-plan
+  environment: Dev
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v5.0.0
+                     
+    - name: Azure Login
+      uses: Azure/login@v2.3.0
+      with:
+        client-id: dd01b263-5ece-426e-911c-32d8138bd329
+        tenant-id: ec84cc3b-8d4d-4362-b666-466802d7ba4e
+        subscription-id: 85bce315-2d40-4002-a3d1-b7f28202855c
+        
+    - name: Terraform apply
+      id: apply
+      run: terraform apply --auto-approve
+      continue-on-error: true
+      working-directory: Parent_module/Dev
