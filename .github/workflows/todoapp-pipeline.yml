@@ -15,7 +15,6 @@ permissions:
 jobs:
   terraform-init-plan:
     name: terraform initwa
-    environment: Dev
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
