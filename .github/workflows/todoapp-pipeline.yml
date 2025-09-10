@@ -1,6 +1,12 @@
 name: "Mera pehla action workflow"
 
-on: workflow_dispatch
+on:
+  pull_request: 
+    branches:
+      - main
+  push: 
+    branches: 
+      - main
 
 permissions:
   id-token: write
@@ -52,6 +58,7 @@ jobs:
   
   terraform-apply:
     runs-on: ubuntu-latest
+    if: github.ref == 'ref/heads/main'
     needs: terraform-init-plan
     environment: Dev
     steps:
