@@ -15,7 +15,7 @@ module "rg" {
 module "acr" {
     source = "../../module/azure_container_registry"
     depends_on = [module.rg]
-    acr_name = "acrdevtodoapp"
+    acr_name = "acrdevtodoapp20250910"
     location = "centralindia"
     rg_name = "rg-dev-todoapp"
     tags = local.common_tags
@@ -23,7 +23,7 @@ module "acr" {
 module "sql_server" {
     source = "../../module/sql_server"
     depends_on = [module.rg]
-    sql_server_name = "sql-dev-todoapp"
+    sql_server_name = "sql-dev-todoapp0910"
     location = "centralindia"
     rg_name = "rg-dev-todoapp"
     admin_username = "sqladminuser"
