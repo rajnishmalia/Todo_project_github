@@ -1,0 +1,52 @@
+name: Terraform Azure CI/CD
+
+on:
+  push:
+    branches:
+      - main
+      - feature/**
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  terraform:
+    name: Terraform Workflow
+    runs-on: ubuntu-latest
+
+    environment: Dev
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # 🟦 Azure Login using OIDC
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          
+
+      # 📦 Setup Terraform
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.5.7
+
+      # 🧪 Terraform Init
+      - name: Terraform Init
+        run: terraform init
+
+      # ✅ Terraform Validate
+      - name: Terraform Validate
+        run: terraform validate
+
+      # 🔍 Terraform Plan (Always)
+      - name: Terraform Plan
+        run: terraform plan
+
+      # 🚀 Terraform Apply (Only on main)
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main'
+        run: terraform apply -auto-approve
