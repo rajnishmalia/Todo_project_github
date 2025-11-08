@@ -37,23 +37,23 @@ jobs:
         id: fmt
         run: terraform fmt -check
         continue-on-error: true
-        working-directory: Parent_module/Dev
+        working-directory: Todo_project_github/Parent_module/Dev
   
       - name: Terraform Init
         id: init
         run: terraform init -input=false
-        working-directory: Parent_module/Dev
+        working-directory: Todo_project_github/Parent_module/Dev
   
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
-        working-directory: Parent_module/Dev
+        working-directory: Todo_project_github/Parent_module/Dev
       
       - name: Terraform Plan
         id: plan
         run: terraform plan -no-color -input=false
         continue-on-error: true
-        working-directory: Parent_module/Dev
+        working-directory: Todo_project_github/Parent_module/Dev
           
   
   terraform-apply:
@@ -80,10 +80,10 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init -input=false
-        working-directory: Parent_module/Dev
+        working-directory: Todo_project_github/Parent_module/Dev
           
       - name: Terraform apply
         id: apply
         run: terraform apply --auto-approve
         continue-on-error: true
-        working-directory: Parent_module/Dev
+        working-directory: Todo_project_github/Parent_module/Dev
